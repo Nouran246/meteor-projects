@@ -1,14 +1,9 @@
 import React from 'react';
+import { ContactForm } from './ContactFrom';
 
 export const App = () => (
   <div>
     <h1>Meteor Wallet</h1>
-    <form>
-      <label for="name">
-        Name
-      </label>
-      <input type="text"></input>
-    </form>
+<ContactForm/>
   </div>
-  
 );
