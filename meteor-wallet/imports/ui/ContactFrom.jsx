@@ -1,12 +1,21 @@
 import React from 'react';
 export const ContactForm = () =>{
+    const [name, setName]=useState();
+    const [email, Email]=useState();
+    const [imageUrl, setimageUrl]=useState();
+        const saveContact =() =>{
+
+    }
     return(
     <form> 
       <div>
       <label htmlfor="name">
         Name
       </label>
-      <input id="name" type="text"></input>
+      <input
+  id="name"
+  onChange={(e) => setName(e.target.value)}
+  type="text"/>
       </div>
       <div>
         <label htmlFor="email">Email</label>
@@ -17,7 +26,7 @@ export const ContactForm = () =>{
       <input type="text" id="imageUrl" />
       </div>
       <div>
-        <button>save contact</button>
+        <button type="button" onClick={saveContact}>save contact</button>
       </div>
     </form>)
 }
