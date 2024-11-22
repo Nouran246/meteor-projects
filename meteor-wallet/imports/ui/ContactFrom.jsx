@@ -7,12 +7,19 @@ export const ContactForm = () => {
   const [imageUrl, setImageUrl] = useState('');
 
   const saveContact = () => {
-    console.log({ name, email, imageUrl });
-    ContactsCollection.insert({ name, email, imageUrl });
-    setName();
-    setEmail();
-    setImageUrl();
-  };
+    Meteor.call('contacts.insert', { name, email, imageUrl }, (error) => {
+      if (error) {
+        console.error('Error inserting contact:', error);
+        alert(`Error: ${error.reason}`);
+      } else {
+        alert('Contact saved successfully!');
+        setName('');
+        setEmail('');
+        setImageUrl('');
+      }
+    });
+  }; // <-- Missing semicolon added here
+  
 
   return (
     <form>
