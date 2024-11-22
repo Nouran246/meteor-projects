@@ -4,24 +4,36 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 
 export const ContactList = () => {
-  // Ensure that you are subscribing to the collection
-  useTracker(() => {
-    Meteor.subscribe('contacts'); // Ensure that the subscription is set up in your server
+  // Subscribing to the 'contacts' publication
+  const { contacts, isLoading } = useTracker(() => {
+    const subscription = Meteor.subscribe('contacts');
+    // Wait until the subscription is ready
+    if (!subscription.ready()) {
+      return { contacts: [], isLoading: true };
+    }
+
+    // Return contacts when subscription is ready
+    return { contacts: ContactsCollection.find({}).fetch(), isLoading: false };
   });
 
-  const contacts = useTracker(() => {
-    return ContactsCollection.find({}).fetch();
-  });
+  // Display loading message while subscription is not ready
+  if (isLoading) {
+    return <p>Loading contacts...</p>;
+  }
 
   return (
     <>
       <h3>Contact List</h3>
       <ul>
-        {contacts.map(contact => (
-          <li key={contact.email}>
-            {contact.name} - {contact.email}
-          </li>
-        ))}
+        {contacts.length > 0 ? (
+          contacts.map(contact => (
+            <li key={contact.email}>
+              {contact.name} - {contact.email}
+            </li>
+          ))
+        ) : (
+          <p>No contacts available</p>
+        )}
       </ul>
     </>
   );

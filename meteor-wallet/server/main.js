@@ -1,8 +1,10 @@
 import { Meteor } from 'meteor/meteor';
-import '../imports/api/ContactsCollections';
-import '../imports/api/ContactsMethods'; // Ensure this is imported
-import { async } from '@babel/runtime/regenerator';
+import { ContactsCollection } from '../imports/api/ContactsCollections';  // Correct import
+import '../imports/api/ContactsMethods'; // Ensure this is imported for any methods you may use
 
-Meteor.startup(async() => {
-  // Any startup logic
+Meteor.startup(() => {
+  // Any startup logic can go here
+  Meteor.publish('contacts', function () {
+    return ContactsCollection.find();  // Publish all contacts to the client
+  });
 });
