@@ -1,32 +1,48 @@
-import React from 'react';
-export const ContactForm = () =>{
-    const [name, setName]=useState();
-    const [email, Email]=useState();
-    const [imageUrl, setimageUrl]=useState();
-        const saveContact =() =>{
+import React, { useState } from 'react';
 
-    }
-    return(
-    <form> 
+export const ContactForm = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
+  const saveContact = () => {
+    console.log({ name, email, imageUrl });
+  };
+
+  return (
+    <form>
       <div>
-      <label htmlfor="name">
-        Name
-      </label>
-      <input
-  id="name"
-  onChange={(e) => setName(e.target.value)}
-  type="text"/>
+        <label htmlFor="name">Name</label>
+        <input
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          type="text"
+        />
       </div>
       <div>
         <label htmlFor="email">Email</label>
-        <input type="email" id="email" />
+        <input
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+        />
       </div>
       <div>
-      <label htmlFor="imageUrl">Image URL</label>
-      <input type="text" id="imageUrl" />
+        <label htmlFor="imageUrl">Image URL</label>
+        <input
+          id="imageUrl"
+          value={imageUrl}
+          onChange={(e) => setImageUrl(e.target.value)}
+          type="text"
+        />
       </div>
       <div>
-        <button type="button" onClick={saveContact}>save contact</button>
+        <button type="button" onClick={saveContact}>
+          Save Contact
+        </button>
       </div>
-    </form>)
-}
+    </form>
+  );
+};
