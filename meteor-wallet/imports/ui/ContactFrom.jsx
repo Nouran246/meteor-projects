@@ -7,6 +7,10 @@ export const ContactForm = () => {
 
   const saveContact = () => {
     console.log({ name, email, imageUrl });
+    ContactsCollection.insert({ name, email, imageUrl })
+    setName();
+    setEmail();
+    setImageUrl();
   };
 
   return (
