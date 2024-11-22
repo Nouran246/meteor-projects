@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ContactsCollection } from '../api/ContactsCollections';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -7,7 +8,7 @@ export const ContactForm = () => {
 
   const saveContact = () => {
     console.log({ name, email, imageUrl });
-    ContactsCollection.insert({ name, email, imageUrl })
+    ContactsCollection.insert({ name, email, imageUrl });
     setName();
     setEmail();
     setImageUrl();
