@@ -1,18 +1,28 @@
 import React from "react";
 import { ContactsCollection } from "../api/ContactsCollections";
+import { useTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
+
 export const ContactList = () => {
-    const contacts= ContactsCollection.find({}).fetch(); //Tracker is a tracking system in meteor
-    return(
-<>
-<h3>Contact List</h3>
-{contacts.map(contact=>(
-    <li>{contact.name} - {contact.email} </li>
-))}
-<ul>
-    <li>Nouran Hassan - Nouran@gmail.com</li>
-    <li>Nouran Hassan - Nouran2@gmail.com</li>
-    <li>Nouran Hassan - Nouran3@gmail.com</li>
-</ul>
-</>
-    )
-}
+  // Ensure that you are subscribing to the collection
+  useTracker(() => {
+    Meteor.subscribe('contacts'); // Ensure that the subscription is set up in your server
+  });
+
+  const contacts = useTracker(() => {
+    return ContactsCollection.find({}).fetch();
+  });
+
+  return (
+    <>
+      <h3>Contact List</h3>
+      <ul>
+        {contacts.map(contact => (
+          <li key={contact.email}>
+            {contact.name} - {contact.email}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+};
