@@ -10,7 +10,7 @@ export const Header = () => {
               <span className="sr-only">Meteor Wallet</span>
               <img
                 className="h-10 w-auto"
-                src="/images/logo.png"
+                src="/logo.png"
                 alt=""
               />
             </a>
