@@ -10,8 +10,8 @@ export const Header = () => {
               <span className="sr-only">Meteor Wallet</span>
               <img
                 className="h-10 w-auto"
-                src="/logo.png"
-                alt=""
+                src="/logo.png"  // Corrected image path
+                alt="Meteor Wallet Logo"
               />
             </a>
           </div>
